@@ -1,0 +1,117 @@
+---
+import '../styles/global.css'
+import {
+  OG_IMAGE,
+  SITE_NAME,
+  absoluteUrl,
+  type PageSeo,
+} from '../data/site'
+import { buildPageJsonLd } from '../lib/seo'
+
+type Props = {
+  seo: PageSeo
+  jsonLdExtra?: unknown[]
+  bodyClass?: string
+}
+
+const { seo, jsonLdExtra = [], bodyClass = 'bg-z-bg text-z-ink' } = Astro.props
+const url = absoluteUrl(seo.path)
+const image = seo.image || OG_IMAGE
+const imageUrl = image.startsWith('http') ? image : absoluteUrl(image)
+const imageAlt = seo.imageAlt || seo.title
+/** Google SERP thumbnails prefer crawlable JPEG 1200x630 */
+const isOgJpeg = image.includes('/og/') && image.endsWith('.jpg')
+const imageType = isOgJpeg
+  ? 'image/jpeg'
+  : image.endsWith('.webp')
+    ? 'image/webp'
+    : image.endsWith('.gif')
+      ? 'image/gif'
+      : 'image/jpeg'
+const imageWidth = isOgJpeg ? 1200 : image.includes('/media/dayz-') ? 800 : 1200
+const imageHeight = isOgJpeg ? 630 : image.includes('/media/dayz-') ? 450 : 630
+const robots =
+  seo.robots ||
+  'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+const jsonLd = buildPageJsonLd(seo, jsonLdExtra)
+const isHome = seo.path === '/' || seo.path === ''
+/** Preload OG only when it supports LCP (hero/product/forums) — not text pages */
+const preloadOg =
+  isHome ||
+  seo.path === '/the-finals-hack' ||
+  seo.path === '/forums' ||
+  seo.path.startsWith('/forums/')
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#08060f" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    {preloadOg ? (
+      <link rel="preload" as="image" href={imageUrl} type={imageType} fetchpriority="high" />
+    ) : null}
+    {isHome ? (
+      <link
+        rel="preload"
+        as="image"
+        href="/media/dayz-hero-loop.jpg"
+        type="image/jpeg"
+        fetchpriority="high"
+      />
+    ) : null}
+
+    <title>{seo.title}</title>
+    <meta name="description" content={seo.description} />
+    <meta name="robots" content={robots} />
+    <meta name="googlebot" content={robots} />
+    <meta name="bingbot" content={robots} />
+    <meta name="author" content={SITE_NAME} />
+    <link rel="canonical" href={url} />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    {/* Self-referential hreflang (en + x-default) — required by Seobility / Google */}
+    <link rel="alternate" href={url} hreflang="en" />
+    <link rel="alternate" href={url} hreflang="x-default" />
+    {/* Legacy crawlers still read image_src for result thumbnails */}
+    <link rel="image_src" href={imageUrl} />
+
+    <meta property="og:type" content={seo.ogType || 'website'} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:url" content={imageUrl} />
+    <meta property="og:image:secure_url" content={imageUrl} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta property="og:image:type" content={imageType} />
+    <meta property="og:image:width" content={String(imageWidth)} />
+    <meta property="og:image:height" content={String(imageHeight)} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seo.title} />
+    <meta name="twitter:description" content={seo.description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class={bodyClass}>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-z-accent focus:px-4 focus:py-2 focus:text-white"
+    >
+      Skip to content
+    </a>
+    <div id="main">
+      <slot />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { ForumsPage } from '../views/ForumsPage'
+import { SEO, SITE_URL } from '../data/site'
+
+const initialQuery = Astro.url.searchParams.get('q') ?? ''
+
+const jsonLdExtra = [
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Guides', item: `${SITE_URL}/forums` },
+    ],
+  },
+]
+---
+
+<BaseLayout seo={SEO.forums} jsonLdExtra={jsonLdExtra}>
+  <ForumsPage client:load initialQuery={initialQuery} />
+</BaseLayout>

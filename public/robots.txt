@@ -1,0 +1,35 @@
+User-agent: Googlebot
+Allow: /
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /media/
+Allow: /og/
+Allow: /videos/
+
+User-agent: Google-InspectionTool
+Allow: /
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /media/
+Allow: /og/
+Allow: /videos/
+
+User-agent: Bingbot
+Allow: /
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /media/
+Allow: /og/
+Allow: /videos/
+
+User-agent: *
+Allow: /
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /media/
+Allow: /og/
+Allow: /videos/
+Disallow: /404
+Disallow: /404.html
+
+Sitemap: https://thefinalshack.org/sitemap.xml

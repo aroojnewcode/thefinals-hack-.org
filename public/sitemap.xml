@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://thefinalshack.org/</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/home.jpg</image:loc>
+      <image:title>The Finals Hack Open Graph</image:title>
+      <image:caption>Google and social preview image for thefinalshack.org homepage.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/dayz-hero-full.webp</image:loc>
+      <image:title>The Finals Hack Hero</image:title>
+      <image:caption>Buy The Finals hack - THE FINALS Aimbot, ESP and radar hack hero artwork for PC.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-esp-gameplay.webp</image:loc>
+      <image:title>THE FINALS ESP Gameplay Screenshot</image:title>
+      <image:caption>In-game ESP wallhack preview with player box and skeleton overlay for The Finals hack.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/dayz-video-thumb.jpg</image:loc>
+      <image:title>The Finals Hack Preview Thumbnail</image:title>
+      <image:caption>Thumbnail for the THE FINALS Aimbot and ESP preview video.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/the-finals-hack.jpg</image:loc>
+      <image:title>The Finals Hack Product Social Preview</image:title>
+      <image:caption>Default Open Graph image for thefinalshack.org product pages.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/the-finals-hack</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/the-finals-hack" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/the-finals-hack" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/the-finals-hack.jpg</image:loc>
+      <image:title>The Finals Hack Open Graph</image:title>
+      <image:caption>Google and social preview for the The Finals hack product page.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-esp-gameplay.webp</image:loc>
+      <image:title>THE FINALS ESP Wallhack Gameplay</image:title>
+      <image:caption>THE FINALS first-person view with ESP bounding box and skeleton overlay.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/dayz-hero-full.webp</image:loc>
+      <image:title>THE FINALS Cheats Product Hero</image:title>
+      <image:caption>Hero artwork for THE FINALS Aimbot, ESP and radar hack product details.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/dayz-menu.gif</image:loc>
+      <image:title>THE FINALS Cheats Menu Preview</image:title>
+      <image:caption>Menu and Aimbot settings preview for THE FINALS cheats.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-gameplay-doorway-esp.webp</image:loc>
+      <image:title>THE FINALS ESP Wallhack Screenshot</image:title>
+      <image:caption>THE FINALS player ESP with bounding box and skeleton overlay for THE FINALS cheats.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/dayz-video-thumb.jpg</image:loc>
+      <image:title>The Finals Hack Preview Thumbnail</image:title>
+      <image:caption>Thumbnail for the The Finals hack preview video.</image:caption>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://thefinalshack.org/media/dayz-video-thumb.jpg</video:thumbnail_loc>
+      <video:title>The Finals Hack Aimbot and ESP Preview</video:title>
+      <video:description>Self-hosted The Finals hack preview showing Aimbot, ESP menu and survival gameplay visuals on PC.</video:description>
+      <video:content_loc>https://thefinalshack.org/videos/dayz-preview.mp4</video:content_loc>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums.jpg</image:loc>
+      <image:title>The Finals Hack Forums Open Graph</image:title>
+      <image:caption>Google preview image for the The Finals Hack guides index.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/dayz-menu.gif</image:loc>
+      <image:title>The Finals Hack Forum Artwork</image:title>
+      <image:caption>Artwork reference for THE FINALS setup and feature guides.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums/aimbot-settings</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/aimbot-settings" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/aimbot-settings" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums-aimbot-settings.jpg</image:loc>
+      <image:title>THE FINALS Aimbot Settings for Silent Aim Open Graph</image:title>
+      <image:caption>THE FINALS Aimbot settings for PC: silent aim, FOV, smoothing and visible-check so your The Finals hack looks legit on official and ranked matches. Start conservative, then save configs.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-gameplay-laboratory-esp.webp</image:loc>
+      <image:title>THE FINALS Aimbot Settings for Silent Aim Artwork</image:title>
+      <image:caption>Tune THE FINALS Aimbot FOV, smoothing, hitbox and silent aim so contestant tracking stays effective without looking robotic to spectating admins.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums/complete-setup</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/complete-setup" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/complete-setup" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums-complete-setup.jpg</image:loc>
+      <image:title>Complete The Finals Hack Setup Open Graph</image:title>
+      <image:caption>Complete The Finals hack setup for Windows PC: buy when status is clear, antivirus exclusions, load order, first-run ESP and Aimbot config, then re-check Easy Anti-Cheat after every patch.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-gameplay-office-esp.webp</image:loc>
+      <image:title>Complete The Finals Hack Setup Artwork</image:title>
+      <image:caption>Step-by-step The Finals hack setup: buy from $35, antivirus exclusions, load order, enable ESP and Aimbot, save configs, re-check Easy Anti-Cheat.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums/disable-antivirus</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/disable-antivirus" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/disable-antivirus" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums-disable-antivirus.jpg</image:loc>
+      <image:title>Antivirus Exclusions for The Finals Hack Open Graph</image:title>
+      <image:caption>Allowlist The Finals hack loaders in Windows Defender and third-party antivirus before you load. Restore quarantines, exclude the delivery folder, then continue setup when status is clear.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-gameplay-training-range.webp</image:loc>
+      <image:title>Antivirus Exclusions for The Finals Hack Artwork</image:title>
+      <image:caption>Allowlist The Finals hack in Windows Defender and common antivirus so the loader is not quarantined before first run.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums/easy-anti-cheat-status</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/easy-anti-cheat-status" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/easy-anti-cheat-status" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums-easy-anti-cheat-status.jpg</image:loc>
+      <image:title>THE FINALS Easy Anti-Cheat Status: Clear to Load vs Updating Open Graph</image:title>
+      <image:caption>THE FINALS Easy Anti-Cheat status explained for The Finals hack: clear-to-load vs Updating after patches, why you wait, and how admin bans differ from anti-cheat detections.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-esp-gameplay.webp</image:loc>
+      <image:title>THE FINALS Easy Anti-Cheat Status: Clear to Load vs Updating Artwork</image:title>
+      <image:caption>What clear-to-load and Updating mean for The Finals hack after Easy Anti-Cheat and game patches - and why admin bans are a separate risk.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums/esp-wallhack-guide</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/esp-wallhack-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/esp-wallhack-guide" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums-esp-wallhack-guide.jpg</image:loc>
+      <image:title>THE FINALS ESP and Wallhack Setup Open Graph</image:title>
+      <image:caption>THE FINALS ESP and wallhack setup: contestant boxes, skeletons, distance, health, class ESP and cashout highlighting. Clean HUD defaults for The Finals hack on PC.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-gameplay-doorway-esp.webp</image:loc>
+      <image:title>THE FINALS ESP and Wallhack Setup Artwork</image:title>
+      <image:caption>Configure THE FINALS ESP and wallhack for contestant boxes, class tracking and cashout highlighting without flooding your HUD.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums/features-list</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/features-list" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/features-list" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums-features-list.jpg</image:loc>
+      <image:title>The Finals Hack Features Checklist Open Graph</image:title>
+      <image:caption>The Finals hack features checklist: silent aim Aimbot, player ESP, cashout ESP, wallhack, radar hack and spoofer on thefinalshack.org from $35. Compare modules before you buy.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-gameplay-arena-elimination.webp</image:loc>
+      <image:title>The Finals Hack Features Checklist Artwork</image:title>
+      <image:caption>Checklist of every The Finals hack module on thefinalshack.org - silent aim, player ESP, cashout ESP, wallhack, radar hack and spoofer - before you open checkout from $35.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums/hotkeys</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/hotkeys" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/hotkeys" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums-hotkeys.jpg</image:loc>
+      <image:title>The Finals Hack Hotkeys After Load Open Graph</image:title>
+      <image:caption>The Finals hack hotkeys after checkout: open menu, Aimbot toggle, player ESP, cashout ESP, radar hack and stream-proof binds. Keep panic keys minimal for field use.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-gameplay-red-grid-radar.webp</image:loc>
+      <image:title>The Finals Hack Hotkeys After Load Artwork</image:title>
+      <image:caption>Menu and toggle hotkeys for The Finals hack after a clean load - Aimbot, ESP, cashout ESP, radar and panic binds.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums/loader-errors</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/loader-errors" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/loader-errors" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums-loader-errors.jpg</image:loc>
+      <image:title>Fix The Finals Hack Loader Errors Open Graph</image:title>
+      <image:caption>Fix The Finals hack loader errors on Windows: antivirus quarantine, overlays, failed inject and menu not opening. Confirm Easy Anti-Cheat status is clear first, then escalate with your order ID.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-gameplay-office-esp.webp</image:loc>
+      <image:title>Fix The Finals Hack Loader Errors Artwork</image:title>
+      <image:caption>Troubleshoot The Finals hack loader errors - menu not opening, instant close, antivirus quarantine and failed inject.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums/radar-hack-guide</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/radar-hack-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/radar-hack-guide" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums-radar-hack-guide.jpg</image:loc>
+      <image:title>THE FINALS Radar Hack Overlay Guide Open Graph</image:title>
+      <image:caption>THE FINALS radar hack guide for PC: 2D radar overlay, off-screen contestant tracking and safer the cashout approaches. Pair with ESP for The Finals hack that stay readable.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-gameplay-training-range.webp</image:loc>
+      <image:title>THE FINALS Radar Hack Overlay Guide Artwork</image:title>
+      <image:caption>Use the THE FINALS radar hack 2D overlay to track off-screen contestants, avoid third parties and approach the cashout more safely.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums/raid-play-guide</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/raid-play-guide" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/raid-play-guide" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums-raid-play-guide.jpg</image:loc>
+      <image:title>Safer The Finals Hack Settings for Loot Runs Open Graph</image:title>
+      <image:caption>Safer The Finals hack settings for cashout rounds and survival: ESP-first play, mild silent aim, cashout highlighting, radar hack and Easy Anti-Cheat habits that reduce report risk on ranked matches.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-gameplay-red-grid-radar.webp</image:loc>
+      <image:title>Safer The Finals Hack Settings for Loot Runs Artwork</image:title>
+      <image:caption>Safer The Finals hack defaults for survival and cashout rounds - ESP-first play, mild silent aim, radar awareness and report-conscious habits.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums/stream-proof-setup</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/stream-proof-setup" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/stream-proof-setup" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums-stream-proof-setup.jpg</image:loc>
+      <image:title>Stream-Proof The Finals Hack for OBS Open Graph</image:title>
+      <image:caption>Stream-proof The Finals hack for OBS and clips: keep ESP, wallhack and Aimbot overlays off recordings while you still see them locally. Test with a private capture first.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-gameplay-doorway-esp.webp</image:loc>
+      <image:title>Stream-Proof The Finals Hack for OBS Artwork</image:title>
+      <image:caption>Hide THE FINALS ESP, cashout highlighting and Aimbot overlays from OBS and capture tools with stream-proof mode.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums/undetected-status</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/undetected-status" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/undetected-status" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums-undetected-status.jpg</image:loc>
+      <image:title>Easy Anti-Cheat Status Checklist Before You Buy or Load Open Graph</image:title>
+      <image:caption>Easy Anti-Cheat status checklist for The Finals hack: confirm clear-to-load before checkout and before every post-patch session. Wait when Updating; buy from $35 when status is live.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-gameplay-arena-elimination.webp</image:loc>
+      <image:title>Easy Anti-Cheat Status Checklist Before You Buy or Load Artwork</image:title>
+      <image:caption>Short Easy Anti-Cheat status checklist for The Finals hack - confirm clear-to-load before checkout and before every post-patch session.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/forums/windows-setup</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/windows-setup" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/windows-setup" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/forums-windows-setup.jpg</image:loc>
+      <image:title>The Finals Hack on Windows 10 and 11 Open Graph</image:title>
+      <image:caption>Windows 10 and 11 setup for The Finals hack: close overlays, add Defender exclusions, launch with correct permissions and run a clean first load against Easy Anti-Cheat.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://thefinalshack.org/media/finals-esp-gameplay.webp</image:loc>
+      <image:title>The Finals Hack on Windows 10 and 11 Artwork</image:title>
+      <image:caption>Windows 10/11 prep for The Finals hack - overlays, Defender exclusions, admin rights and a clean first launch against Easy Anti-Cheat.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/reviews</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/reviews" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/reviews" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/reviews.jpg</image:loc>
+      <image:title>The Finals Hack Reviews Open Graph</image:title>
+      <image:caption>Google preview image for The Finals hack reviews.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/faq</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/faq" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/faq.jpg</image:loc>
+      <image:title>The Finals Hack FAQ Open Graph</image:title>
+      <image:caption>Google preview image for the The Finals Hack FAQ.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/support</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/support" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/support" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/support.jpg</image:loc>
+      <image:title>The Finals Hack Support Open Graph</image:title>
+      <image:caption>Google preview image for The Finals Hack support.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/privacy</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/privacy" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/privacy.jpg</image:loc>
+      <image:title>The Finals Hack Privacy Policy</image:title>
+      <image:caption>Privacy policy preview for thefinalshack.org orders and support.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/refunds</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.45</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/refunds" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/refunds" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/refunds.jpg</image:loc>
+      <image:title>The Finals Hack Refund Policy</image:title>
+      <image:caption>Refund rules preview for digital The Finals Hack licenses.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thefinalshack.org/terms</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/terms" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/terms" />
+    <image:image>
+      <image:loc>https://thefinalshack.org/og/terms.jpg</image:loc>
+      <image:title>The Finals Hack Terms of Use</image:title>
+      <image:caption>License terms preview for The Finals Hack.</image:caption>
+    </image:image>
+  </url>
+</urlset>
