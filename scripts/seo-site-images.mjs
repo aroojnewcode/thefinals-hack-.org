@@ -1,0 +1,22 @@
+/** Shared sitemap / SEO image paths — keep generate-sitemaps and verify-seo in sync. */
+export const ALL_SITE_IMAGES = [
+  '/media/dayz-hero-full.webp',
+  '/media/finals-esp-gameplay.webp',
+  '/media/finals-gameplay-training-range.webp',
+  '/media/finals-gameplay-arena-elimination.webp',
+  '/media/finals-gameplay-office-esp.webp',
+  '/media/finals-gameplay-red-grid-radar.webp',
+  '/media/finals-gameplay-doorway-esp.webp',
+  '/media/dayz-menu.gif',
+  '/media/finals-gameplay-laboratory-esp.webp',
+  '/media/dayz-video-thumb.jpg',
+  '/og/home.jpg',
+  '/og/the-finals-hack.jpg',
+  '/og/forums.jpg',
+  '/og/reviews.jpg',
+  '/og/faq.jpg',
+  '/og/support.jpg',
+  '/og/privacy.jpg',
+  '/og/terms.jpg',
+  '/og/refunds.jpg',
+]

@@ -1,5 +1,6 @@
 ﻿import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join, relative } from 'node:path'
+import { ALL_SITE_IMAGES } from './seo-site-images.mjs'
 
 const root = join(import.meta.dirname, '..')
 const dist = join(root, 'dist')
@@ -214,21 +215,6 @@ const urlBlocks = sitemap.match(/<url>[\s\S]*?<\/url>/g) || []
 const pageLocs = urlBlocks.map((block) => block.match(/<loc>([^<]+)<\/loc>/)?.[1]).filter(Boolean)
 const uniqueSitemapUrls = new Set(pageLocs)
 const imageLocs = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((match) => match[1])
-const requiredImages = [
-  '/og/home.jpg',
-  '/og/the-finals-hack.jpg',
-  '/og/forums.jpg',
-  '/og/reviews.jpg',
-  '/og/faq.jpg',
-  '/og/support.jpg',
-  '/media/dayz-hero-full.webp',
-  '/media/finals-esp-gameplay.webp',
-  '/media/finals-gameplay-doorway-esp.webp',
-  '/media/finals-gameplay-training-range.webp',
-  '/media/dayz-menu.gif',
-  '/media/dayz-video-thumb.jpg',
-]
-
 for (const url of expectedUrls) {
   if (!uniqueSitemapUrls.has(url)) fail(`sitemap.xml missing built page ${url}`)
 }
@@ -248,7 +234,7 @@ for (const block of urlBlocks) {
     fail(`sitemap URL missing image entry: ${loc}`)
   }
 }
-for (const image of requiredImages) {
+for (const image of ALL_SITE_IMAGES) {
   if (!imageLocs.some((loc) => loc.endsWith(image))) {
     fail(`sitemap.xml missing required image ${image}`)
   }
@@ -312,7 +298,6 @@ for (const asset of [
   'public/media/finals-gameplay-red-grid-radar.webp',
   'public/media/finals-gameplay-office-esp.webp',
   'public/media/dayz-box.jpg',
-  'public/media/dayz-esp-gameplay.gif',
   'public/media/dayz-menu.gif',
   'public/media/dayz-video-thumb.jpg',
   'public/videos/dayz-preview.mp4',

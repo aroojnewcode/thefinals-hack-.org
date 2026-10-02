@@ -5,6 +5,7 @@
 import { existsSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { ALL_SITE_IMAGES } from './seo-site-images.mjs'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const publicDir = join(root, 'public')
@@ -29,30 +30,6 @@ const GAMEPLAY_RED = '/media/finals-gameplay-red-grid-radar.webp'
 const VIDEO_THUMB = '/media/dayz-video-thumb.jpg'
 const PREVIEW_VIDEO = '/videos/dayz-preview.mp4'
 const OG_DEFAULT = '/og/the-finals-hack.jpg'
-
-const ALL_SITE_IMAGES = [
-  HERO_FULL,
-  PRODUCT_ESP,
-  GAMEPLAY_TRAINING,
-  GAMEPLAY_ARENA,
-  GAMEPLAY_OFFICE,
-  BOX,
-  ESP,
-  MENU,
-  GAMEPLAY_LAB,
-  GAMEPLAY_DOORWAY,
-  GAMEPLAY_RED,
-  VIDEO_THUMB,
-  '/og/home.jpg',
-  '/og/the-finals-hack.jpg',
-  '/og/forums.jpg',
-  '/og/reviews.jpg',
-  '/og/faq.jpg',
-  '/og/support.jpg',
-  '/og/privacy.jpg',
-  '/og/terms.jpg',
-  '/og/refunds.jpg',
-]
 
 const FORUM_IMAGES = {
   'features-list': GAMEPLAY_ARENA,
