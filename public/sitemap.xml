@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://thefinalshack.org/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/" />
     <lastmod>2026-10-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -38,8 +34,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/the-finals-hack</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/the-finals-hack" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/the-finals-hack" />
     <lastmod>2026-10-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -73,20 +67,9 @@
       <image:title>The Finals Hack Preview Thumbnail</image:title>
       <image:caption>Thumbnail for the The Finals hack preview video.</image:caption>
     </image:image>
-    <video:video>
-      <video:thumbnail_loc>https://thefinalshack.org/media/dayz-video-thumb.jpg</video:thumbnail_loc>
-      <video:title>The Finals Hack Aimbot and ESP Preview</video:title>
-      <video:description>Self-hosted The Finals hack preview showing Aimbot, ESP menu and survival gameplay visuals on PC.</video:description>
-      <video:content_loc>https://thefinalshack.org/videos/dayz-preview.mp4</video:content_loc>
-      <video:publication_date>2026-09-16</video:publication_date>
-      <video:family_friendly>yes</video:family_friendly>
-      <video:live>no</video:live>
-    </video:video>
   </url>
   <url>
     <loc>https://thefinalshack.org/forums</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums" />
     <lastmod>2026-10-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -103,8 +86,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums/aimbot-settings</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/aimbot-settings" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/aimbot-settings" />
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -121,8 +102,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums/complete-setup</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/complete-setup" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/complete-setup" />
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -139,8 +118,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums/disable-antivirus</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/disable-antivirus" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/disable-antivirus" />
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -157,8 +134,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums/easy-anti-cheat-status</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/easy-anti-cheat-status" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/easy-anti-cheat-status" />
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -175,8 +150,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums/esp-wallhack-guide</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/esp-wallhack-guide" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/esp-wallhack-guide" />
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -193,8 +166,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums/features-list</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/features-list" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/features-list" />
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -211,8 +182,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums/hotkeys</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/hotkeys" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/hotkeys" />
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -229,8 +198,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums/loader-errors</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/loader-errors" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/loader-errors" />
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -247,8 +214,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums/radar-hack-guide</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/radar-hack-guide" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/radar-hack-guide" />
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -265,8 +230,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums/raid-play-guide</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/raid-play-guide" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/raid-play-guide" />
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -283,8 +246,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums/stream-proof-setup</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/stream-proof-setup" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/stream-proof-setup" />
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -301,8 +262,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums/undetected-status</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/undetected-status" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/undetected-status" />
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -319,8 +278,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums/windows-setup</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums/windows-setup" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/forums/windows-setup" />
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -337,8 +294,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/reviews</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/reviews" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/reviews" />
     <lastmod>2026-10-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -350,8 +305,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/faq</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/faq" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/faq" />
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
@@ -363,8 +316,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/support</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/support" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/support" />
     <lastmod>2026-10-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
@@ -376,8 +327,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/privacy</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/privacy" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/privacy" />
     <lastmod>2026-10-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
@@ -389,8 +338,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/refunds</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/refunds" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/refunds" />
     <lastmod>2026-10-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.45</priority>
@@ -402,8 +349,6 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/terms</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/terms" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://thefinalshack.org/terms" />
     <lastmod>2026-10-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>

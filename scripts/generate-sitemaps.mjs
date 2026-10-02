@@ -13,8 +13,6 @@ const dataDir = join(root, 'src', 'data')
 const pagesDir = join(root, 'src', 'pages')
 const SITE = (process.env.SITE_URL || 'https://thefinalshack.org').replace(/\/$/, '')
 const TODAY = new Date().toLocaleDateString('en-CA')
-const HREFLANG = ['en', 'x-default']
-
 const HERO_FULL = '/media/dayz-hero-full.webp'
 const COVER = '/media/dayz-cover.webp'
 const PRODUCT_ESP = '/media/finals-esp-gameplay.webp'
@@ -28,7 +26,6 @@ const GAMEPLAY_LAB = '/media/finals-gameplay-laboratory-esp.webp'
 const GAMEPLAY_DOORWAY = '/media/finals-gameplay-doorway-esp.webp'
 const GAMEPLAY_RED = '/media/finals-gameplay-red-grid-radar.webp'
 const VIDEO_THUMB = '/media/dayz-video-thumb.jpg'
-const PREVIEW_VIDEO = '/videos/dayz-preview.mp4'
 const OG_DEFAULT = '/og/the-finals-hack.jpg'
 
 const FORUM_IMAGES = {
@@ -109,13 +106,6 @@ function loadStaticRoutes() {
     .map((entry) => (entry.name === 'index.astro' ? '/' : `/${entry.name.slice(0, -6)}`))
 }
 
-function alternateLinks(url) {
-  return HREFLANG.map(
-    (language) =>
-      `    <xhtml:link rel="alternate" hreflang="${language}" href="${escapeXml(url)}" />`,
-  ).join('\n')
-}
-
 function imageBlock({ src, title, caption }) {
   return `    <image:image>
       <image:loc>${escapeXml(siteUrl(src))}</image:loc>
@@ -124,28 +114,12 @@ function imageBlock({ src, title, caption }) {
     </image:image>`
 }
 
-function videoBlock({ thumb, title, description, content, publicationDate = '2026-09-16' }) {
-  return `    <video:video>
-      <video:thumbnail_loc>${escapeXml(siteUrl(thumb))}</video:thumbnail_loc>
-      <video:title>${escapeXml(asciiSafe(title))}</video:title>
-      <video:description>${escapeXml(asciiSafe(description))}</video:description>
-      <video:content_loc>${escapeXml(siteUrl(content))}</video:content_loc>
-      <video:publication_date>${escapeXml(publicationDate)}</video:publication_date>
-      <video:family_friendly>yes</video:family_friendly>
-      <video:live>no</video:live>
-    </video:video>`
-}
-
-function urlEntry({ path, priority, changefreq, lastmod = TODAY, images, videos = [] }) {
+function urlEntry({ path, priority, changefreq, lastmod = TODAY, images }) {
   if (!images?.length) throw new Error(`Sitemap entry for ${path} is missing images`)
   const url = siteUrl(path)
-  const media = [
-    ...images.map((image) => imageBlock(image)),
-    ...videos.map((video) => videoBlock(video)),
-  ]
+  const media = images.map((image) => imageBlock(image))
   return `  <url>
     <loc>${escapeXml(url)}</loc>
-${alternateLinks(url)}
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
@@ -314,21 +288,6 @@ function imagesForPath(path, games, forums) {
   return [{ src: OG_DEFAULT, title: 'The Finals Hack', caption: 'The Finals Hack page artwork.' }]
 }
 
-function videosForPath(path) {
-  if (path === '/the-finals-hack') {
-    return [
-      {
-        thumb: VIDEO_THUMB,
-        title: 'The Finals Hack Aimbot and ESP Preview',
-        description:
-          'Self-hosted The Finals hack preview showing Aimbot, ESP menu and survival gameplay visuals on PC.',
-        content: PREVIEW_VIDEO,
-      },
-    ]
-  }
-  return []
-}
-
 function collectAllPaths(games, forums, staticRoutes) {
   const paths = new Set([
     ...staticRoutes,
@@ -370,15 +329,12 @@ function buildSitemap(games, forums, allPaths) {
       changefreq: meta.changefreq,
       lastmod: forum?.date || TODAY,
       images: imagesForPath(path, games, forums),
-      videos: videosForPath(path),
     })
   })
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${entries.join('\n')}
 </urlset>
 `
@@ -428,9 +384,6 @@ function validate(games, forums, allPaths, sitemap) {
   }
   for (const image of ALL_SITE_IMAGES) {
     if (!imageLocs.includes(siteUrl(image))) errors.push(`Sitemap missing required image: ${image}`)
-  }
-  if (!sitemap.includes(siteUrl(PREVIEW_VIDEO))) {
-    errors.push('Sitemap missing THE FINALS preview video content_loc')
   }
   if (/Tarkov|tarkovcheats|EFT Reaper|Warzone|warzonecheats|Ricochet/i.test(sitemap)) {
     errors.push('Sitemap still contains legacy Tarkov/Warzone labels')

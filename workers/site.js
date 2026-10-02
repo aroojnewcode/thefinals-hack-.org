@@ -46,7 +46,7 @@ function toApexUrl(url) {
 }
 
 const SEO_ASSETS = {
-  '/sitemap.xml': 'application/xml; charset=utf-8',
+  '/sitemap.xml': 'text/xml; charset=utf-8',
   '/robots.txt': 'text/plain; charset=utf-8',
   '/sitemap.css': 'text/css; charset=utf-8',
 }

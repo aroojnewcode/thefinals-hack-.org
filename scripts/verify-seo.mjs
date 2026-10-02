@@ -220,11 +220,15 @@ if (/forums\/(instructions|how-to-load)/.test(sitemap)) fail('Retired forum rema
 if (!sitemap.includes('https://thefinalshack.org/')) {
   fail('sitemap.xml must use https://thefinalshack.org URLs')
 }
-if (!sitemap.includes('/videos/dayz-preview.mp4')) {
-  fail('sitemap.xml missing THE FINALS preview video entry')
+if (sitemap.includes('xmlns:video=') || sitemap.includes('<video:video>')) {
+  fail('sitemap.xml must be a standard urlset + image extension only (no video namespace)')
 }
-if (!sitemap.includes('xmlns:video=')) {
-  fail('sitemap.xml missing video namespace for Google video indexing')
+if (sitemap.includes('xmlns:xhtml=') || sitemap.includes('<xhtml:link')) {
+  fail('sitemap.xml must not embed xhtml:hreflang (use on-page link tags only)')
+}
+const productHtml = readFileSync(join(dist, 'the-finals-hack', 'index.html'), 'utf8')
+if (!productHtml.includes('dayz-preview.mp4') && !productHtml.includes('VideoObject')) {
+  fail('Product page must expose preview video via HTML or JSON-LD (not sitemap video extension)')
 }
 if (/tarkovcheats|Tarkov|warzonecheats|Delta Product|Auron Product|Ricochet/i.test(sitemap)) {
   fail('sitemap.xml still contains legacy Tarkov/Warzone branding')
@@ -264,9 +268,6 @@ for (const image of ALL_SITE_IMAGES) {
 }
 if (!sitemap.trimStart().startsWith('<?xml version="1.0" encoding="UTF-8"?>')) {
   fail('sitemap.xml must start with an XML declaration')
-}
-if (!sitemap.includes('<video:publication_date>')) {
-  fail('sitemap.xml video entries must include video:publication_date for Google video sitemaps')
 }
 const openTags = (sitemap.match(/<([a-zA-Z0-9:_-]+)(\s|>)/g) || []).length
 const closeTags = (sitemap.match(/<\/[a-zA-Z0-9:_-]+>/g) || []).length
