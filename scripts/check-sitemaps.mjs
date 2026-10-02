@@ -42,6 +42,26 @@ if (!readFileSync(robots, 'utf8').includes(`Sitemap: ${CANONICAL}`)) {
   fail('robots.txt must declare canonical sitemap URL')
 }
 
+async function probeRedirect(url, expectedLocation) {
+  try {
+    const res = await fetch(url, {
+      method: 'GET',
+      redirect: 'manual',
+      headers: { 'User-Agent': 'thefinalshack-sitemap-check/1.0' },
+    })
+    if (res.status !== 301) {
+      fail(`${url} expected HTTP 301 to apex sitemap, got ${res.status}`)
+      return
+    }
+    const location = res.headers.get('location') || ''
+    if (location !== expectedLocation) {
+      fail(`${url} expected Location: ${expectedLocation}, got ${location || '(missing)'}`)
+    }
+  } catch (err) {
+    fail(`${url} redirect probe failed: ${err.message}`)
+  }
+}
+
 async function probe(url, expectStatus, expectXml, method = 'GET') {
   try {
     const res = await fetch(url, {
@@ -111,7 +131,8 @@ await probe(CANONICAL, 200, true, 'HEAD')
 await probeGooglebot(CANONICAL, 'HEAD')
 await probeGooglebot(CANONICAL, 'GET')
 await probe(`${SITE}/robots.txt`, 200, false)
-await probe(`https://www.thefinalshack.org/sitemap.xml`, 301, false)
+await probeRedirect(`https://www.thefinalshack.org/sitemap.xml`, CANONICAL)
+await probeRedirect(`http://thefinalshack.org/sitemap.xml`, CANONICAL)
 for (const path of LEGACY) {
   await probe(`${SITE}${path}`, 301, false)
 }

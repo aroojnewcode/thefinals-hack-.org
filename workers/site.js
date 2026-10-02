@@ -46,7 +46,7 @@ function toApexUrl(url) {
 }
 
 const SEO_ASSETS = {
-  '/sitemap.xml': 'text/xml; charset=utf-8',
+  '/sitemap.xml': 'application/xml; charset=utf-8',
   '/robots.txt': 'text/plain; charset=utf-8',
   '/sitemap.css': 'text/css; charset=utf-8',
 }
@@ -125,9 +125,7 @@ async function handleRequest(request, env) {
     return Response.redirect(apexSitemapUrl('/sitemap.xml'), 301)
   }
 
-  // /sitemap.xml and /robots.txt are static assets (see wrangler.toml). Worker only handles legacy aliases.
-  const seoType =
-    url.pathname === '/sitemap.css' ? SEO_ASSETS['/sitemap.css'] : undefined
+  const seoType = SEO_ASSETS[url.pathname]
   if (seoType) {
     return serveSeoAsset(env, request, url.pathname, seoType)
   }
