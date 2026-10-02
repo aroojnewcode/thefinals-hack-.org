@@ -223,7 +223,8 @@ const requiredImages = [
   '/og/support.jpg',
   '/media/dayz-hero-full.webp',
   '/media/finals-esp-gameplay.webp',
-  '/media/dayz-esp-gameplay.gif',
+  '/media/finals-gameplay-doorway-esp.webp',
+  '/media/finals-gameplay-training-range.webp',
   '/media/dayz-menu.gif',
   '/media/dayz-video-thumb.jpg',
 ]

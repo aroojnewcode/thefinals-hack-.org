@@ -5,7 +5,7 @@
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://thefinalshack.org/</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/" />
@@ -38,7 +38,7 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/the-finals-hack</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/the-finals-hack" />
@@ -84,7 +84,7 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/forums</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/forums" />
@@ -336,7 +336,7 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/reviews</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/reviews" />
@@ -349,7 +349,7 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/faq</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/faq" />
@@ -362,7 +362,7 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/support</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/support" />
@@ -375,7 +375,7 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/privacy</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/privacy" />
@@ -388,7 +388,7 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/refunds</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.45</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/refunds" />
@@ -401,7 +401,7 @@
   </url>
   <url>
     <loc>https://thefinalshack.org/terms</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://thefinalshack.org/terms" />
