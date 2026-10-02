@@ -94,8 +94,17 @@ async function serveSeoAsset(env, request, assetPath, seoType) {
     })
   }
 
+  // Google Search Console and many crawlers probe with HEAD first — empty body is valid.
+  if (request.method === 'HEAD') {
+    return new Response(null, {
+      status: seoResponse.status,
+      statusText: seoResponse.statusText,
+      headers,
+    })
+  }
+
   const body = await seoResponse.arrayBuffer()
-  if (assetPath === '/sitemap.xml') {
+  if (assetPath === '/sitemap.xml' && body.byteLength > 0) {
     const head = new TextDecoder().decode(body.slice(0, 64))
     if (!head.trimStart().startsWith('<?xml')) {
       return new Response(EMPTY_SITEMAP, { status: 503, headers })

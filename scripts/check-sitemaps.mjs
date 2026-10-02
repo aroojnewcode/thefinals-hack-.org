@@ -42,20 +42,24 @@ if (!readFileSync(robots, 'utf8').includes(`Sitemap: ${CANONICAL}`)) {
   fail('robots.txt must declare canonical sitemap URL')
 }
 
-async function probe(url, expectStatus, expectXml) {
+async function probe(url, expectStatus, expectXml, method = 'GET') {
   try {
     const res = await fetch(url, {
+      method,
       redirect: 'manual',
       headers: { 'User-Agent': 'thefinalshack-sitemap-check/1.0' },
     })
     const ct = res.headers.get('content-type') || ''
-    const body = await res.text()
+    const body = method === 'HEAD' ? '' : await res.text()
     if (res.status !== expectStatus) {
-      fail(`${url} expected HTTP ${expectStatus}, got ${res.status}`)
+      fail(`${url} (${method}) expected HTTP ${expectStatus}, got ${res.status}`)
       return
     }
-    if (expectXml && !ct.includes('xml') && !body.trimStart().startsWith('<?xml')) {
+    if (expectXml && method === 'GET' && !ct.includes('xml') && !body.trimStart().startsWith('<?xml')) {
       fail(`${url} expected XML, got ${ct || 'unknown type'}`)
+    }
+    if (expectXml && method === 'HEAD' && !ct.includes('xml')) {
+      fail(`${url} HEAD must return XML content-type, got ${ct || 'unknown type'}`)
     }
   } catch (err) {
     fail(`${url} fetch failed: ${err.message}`)
@@ -64,6 +68,7 @@ async function probe(url, expectStatus, expectXml) {
 
 console.log('Checking live sitemap endpoints…')
 await probe(CANONICAL, 200, true)
+await probe(CANONICAL, 200, true, 'HEAD')
 await probe(`${SITE}/robots.txt`, 200, false)
 await probe(`https://www.thefinalshack.org/sitemap.xml`, 301, false)
 for (const path of LEGACY) {
