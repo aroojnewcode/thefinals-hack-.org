@@ -96,6 +96,10 @@ export default {
       if (!headers.has('Cache-Control')) {
         headers.set('Cache-Control', 'public, max-age=3600')
       }
+      if (!seoResponse.ok && assetPath === '/sitemap.xml') {
+        const fallback = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n`
+        return new Response(fallback, { status: 503, headers })
+      }
       return new Response(seoResponse.body, {
         status: seoResponse.status,
         statusText: seoResponse.statusText,
