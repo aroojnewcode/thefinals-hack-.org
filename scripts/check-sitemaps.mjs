@@ -89,6 +89,12 @@ async function probeGooglebot(url, method) {
       if (!body.trimStart().startsWith('<?xml')) {
         fail(`Googlebot GET ${url} body is not XML`)
       }
+      if (!body.includes('<loc>https://thefinalshack.org/</loc>')) {
+        fail(`Googlebot GET ${url} returned an empty or invalid sitemap (no homepage <loc>)`)
+      }
+      if (body.length < 10_000) {
+        fail(`Googlebot GET ${url} sitemap too small (${body.length} bytes)`)
+      }
     }
   } catch (err) {
     fail(`Googlebot ${method} ${url} failed: ${err.message}`)

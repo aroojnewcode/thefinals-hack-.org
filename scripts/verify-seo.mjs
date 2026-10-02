@@ -215,6 +215,19 @@ if (
 }
 
 const sitemap = readFileSync(join(dist, 'sitemap.xml'), 'utf8')
+const sitemapUrlCount = (sitemap.match(/<url>/g) || []).length
+if (sitemapUrlCount < 20) {
+  fail(`dist/sitemap.xml must list all indexed pages (found ${sitemapUrlCount} <url> entries)`)
+}
+if (!sitemap.includes('<loc>https://thefinalshack.org/</loc>')) {
+  fail('dist/sitemap.xml is empty or missing homepage URL')
+}
+if (sitemap.length < 10_000) {
+  fail(`dist/sitemap.xml is too small (${sitemap.length} bytes) — deploy would serve an empty sitemap`)
+}
+if (/<urlset[^>]*\/>/.test(sitemap.replace(/\s/g, ''))) {
+  fail('dist/sitemap.xml must not be a self-closing empty urlset')
+}
 if (sitemap.includes('<sitemapindex')) fail('sitemap.xml must be a single urlset, not an index')
 if (/forums\/(instructions|how-to-load)/.test(sitemap)) fail('Retired forum remains in sitemap.xml')
 if (!sitemap.includes('https://thefinalshack.org/')) {

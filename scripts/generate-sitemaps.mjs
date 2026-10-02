@@ -411,10 +411,7 @@ function main() {
   const sitemap = buildSitemap(games, forums, allPaths)
   validate(games, forums, allPaths, sitemap)
 
-  writeFileSync(join(publicDir, 'sitemap.xml'), sitemap, 'utf8')
-  writeFileSync(
-    join(publicDir, 'robots.txt'),
-    [
+  const robotsTxt = [
       'User-agent: Googlebot',
       'Allow: /',
       'Allow: /sitemap.xml',
@@ -451,9 +448,16 @@ function main() {
       '',
       `Sitemap: ${siteUrl('/sitemap.xml')}`,
       '',
-    ].join('\n'),
-    'utf8',
-  )
+    ].join('\n')
+
+  writeFileSync(join(publicDir, 'sitemap.xml'), sitemap, 'utf8')
+  writeFileSync(join(publicDir, 'robots.txt'), robotsTxt, 'utf8')
+
+  const distDir = join(root, 'dist')
+  if (existsSync(distDir)) {
+    writeFileSync(join(distDir, 'sitemap.xml'), sitemap, 'utf8')
+    writeFileSync(join(distDir, 'robots.txt'), robotsTxt, 'utf8')
+  }
 
   for (const name of [
     'sitemap-pages.xml',

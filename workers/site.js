@@ -62,8 +62,6 @@ const LEGACY_SITEMAP_PATHS = new Set([
   '/sitemap_index.xml',
 ])
 
-const EMPTY_SITEMAP = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n`
-
 function apexSitemapUrl(pathname) {
   return `https://thefinalshack.org${pathname.startsWith('/') ? pathname : `/${pathname}`}`
 }
@@ -85,12 +83,9 @@ async function serveSeoAsset(env, request, assetPath, seoType) {
   const headers = seoHeaders(seoType, seoResponse.headers)
 
   if (!seoResponse.ok) {
-    if (assetPath === '/sitemap.xml') {
-      return new Response(EMPTY_SITEMAP, { status: 503, headers })
-    }
     return new Response(seoResponse.statusText || 'Not Found', {
       status: seoResponse.status,
-      headers,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
     })
   }
 
@@ -104,12 +99,6 @@ async function serveSeoAsset(env, request, assetPath, seoType) {
   }
 
   const body = await seoResponse.arrayBuffer()
-  if (assetPath === '/sitemap.xml' && body.byteLength > 0) {
-    const head = new TextDecoder().decode(body.slice(0, 64))
-    if (!head.trimStart().startsWith('<?xml')) {
-      return new Response(EMPTY_SITEMAP, { status: 503, headers })
-    }
-  }
 
   return new Response(body, {
     status: seoResponse.status,
@@ -136,10 +125,11 @@ async function handleRequest(request, env) {
     return Response.redirect(apexSitemapUrl('/sitemap.xml'), 301)
   }
 
-  const seoType = SEO_ASSETS[url.pathname]
+  // /sitemap.xml and /robots.txt are static assets (see wrangler.toml). Worker only handles legacy aliases.
+  const seoType =
+    url.pathname === '/sitemap.css' ? SEO_ASSETS['/sitemap.css'] : undefined
   if (seoType) {
-    const assetPath = url.pathname === '/sitemap.xml/' ? '/sitemap.xml' : url.pathname
-    return serveSeoAsset(env, request, assetPath, seoType)
+    return serveSeoAsset(env, request, url.pathname, seoType)
   }
 
   const assetResponse = await assetsFetch(env, request, url.pathname + url.search)
@@ -170,18 +160,6 @@ export default {
     } catch (error) {
       console.error('Worker error:', error)
       const path = new URL(request.url).pathname
-      if (path === '/sitemap.xml' || path === '/sitemap.xml/') {
-        return new Response(EMPTY_SITEMAP, {
-          status: 503,
-          headers: seoHeaders(SEO_ASSETS['/sitemap.xml'], new Headers()),
-        })
-      }
-      if (path === '/robots.txt') {
-        return new Response('User-agent: *\nDisallow:\n', {
-          status: 503,
-          headers: seoHeaders(SEO_ASSETS['/robots.txt'], new Headers()),
-        })
-      }
       return new Response('Internal Server Error', { status: 500 })
     }
   },
