@@ -124,12 +124,13 @@ function imageBlock({ src, title, caption }) {
     </image:image>`
 }
 
-function videoBlock({ thumb, title, description, content }) {
+function videoBlock({ thumb, title, description, content, publicationDate = '2026-09-16' }) {
   return `    <video:video>
       <video:thumbnail_loc>${escapeXml(siteUrl(thumb))}</video:thumbnail_loc>
       <video:title>${escapeXml(asciiSafe(title))}</video:title>
       <video:description>${escapeXml(asciiSafe(description))}</video:description>
       <video:content_loc>${escapeXml(siteUrl(content))}</video:content_loc>
+      <video:publication_date>${escapeXml(publicationDate)}</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
       <video:live>no</video:live>
     </video:video>`
@@ -144,10 +145,10 @@ function urlEntry({ path, priority, changefreq, lastmod = TODAY, images, videos 
   ]
   return `  <url>
     <loc>${escapeXml(url)}</loc>
+${alternateLinks(url)}
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
-${alternateLinks(url)}
 ${media.join('\n')}
   </url>`
 }

@@ -265,6 +265,15 @@ for (const image of ALL_SITE_IMAGES) {
 if (!sitemap.trimStart().startsWith('<?xml version="1.0" encoding="UTF-8"?>')) {
   fail('sitemap.xml must start with an XML declaration')
 }
+if (!sitemap.includes('<video:publication_date>')) {
+  fail('sitemap.xml video entries must include video:publication_date for Google video sitemaps')
+}
+const openTags = (sitemap.match(/<([a-zA-Z0-9:_-]+)(\s|>)/g) || []).length
+const closeTags = (sitemap.match(/<\/[a-zA-Z0-9:_-]+>/g) || []).length
+const selfClosing = (sitemap.match(/<[a-zA-Z0-9:_-]+[^>]*\/>/g) || []).length
+if (openTags !== closeTags + selfClosing) {
+  fail('sitemap.xml is not well-formed XML (unbalanced tags)')
+}
 if (sitemap.includes('xml-stylesheet')) {
   fail('sitemap.xml must not embed xml-stylesheet (Worker injects it for browsers only)')
 }
@@ -380,8 +389,8 @@ if (!headers.includes('Content-Type: text/html; charset=utf-8')) {
 if (!headers.includes('/sitemap.xml')) {
   fail('_headers missing /sitemap.xml Content-Type')
 }
-if (!headers.includes('text/xml; charset=utf-8')) {
-  fail('_headers missing XML charset Content-Type')
+if (!headers.includes('application/xml; charset=utf-8') && !headers.includes('text/xml; charset=utf-8')) {
+  fail('_headers missing XML charset Content-Type for /sitemap.xml')
 }
 
 if (failures.length) {

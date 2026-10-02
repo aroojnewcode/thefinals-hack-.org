@@ -45,6 +45,11 @@ function toApexUrl(url) {
   return next
 }
 
+const SEO_ASSETS = {
+  '/sitemap.xml': 'application/xml; charset=utf-8',
+  '/robots.txt': 'text/plain; charset=utf-8',
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url)
@@ -58,6 +63,24 @@ export default {
     const apex = toApexUrl(url)
     if (apex) {
       return Response.redirect(apex.toString(), 301)
+    }
+
+    const seoType = SEO_ASSETS[url.pathname]
+    if (seoType) {
+      const seoResponse = await assetsFetch(env, request, url.pathname + url.search)
+      if (seoResponse.ok) {
+        const headers = new Headers(seoResponse.headers)
+        headers.set('Content-Type', seoType)
+        headers.set('X-Content-Type-Options', 'nosniff')
+        if (!headers.has('Cache-Control')) {
+          headers.set('Cache-Control', 'public, max-age=3600')
+        }
+        return new Response(seoResponse.body, {
+          status: seoResponse.status,
+          statusText: seoResponse.statusText,
+          headers,
+        })
+      }
     }
 
     const assetResponse = await assetsFetch(env, request, url.pathname + url.search)
