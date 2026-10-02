@@ -26,6 +26,7 @@ export function SeoMedia({
           loading={priority ? 'eager' : 'lazy'}
           decoding={priority ? 'sync' : 'async'}
           fetchPriority={priority ? 'high' : 'auto'}
+          sizes="(max-width: 1024px) 100vw, 50vw"
           className="aspect-video h-full w-full object-cover"
         />
         {hasVideo ? (

@@ -21,26 +21,20 @@ const imageUrl = image.startsWith('http') ? image : absoluteUrl(image)
 const imageAlt = seo.imageAlt || seo.title
 /** Google SERP thumbnails prefer crawlable JPEG 1200x630 */
 const isOgJpeg = image.includes('/og/') && image.endsWith('.jpg')
-const imageType = isOgJpeg
-  ? 'image/jpeg'
-  : image.endsWith('.webp')
-    ? 'image/webp'
-    : image.endsWith('.gif')
-      ? 'image/gif'
-      : 'image/jpeg'
-const imageWidth = isOgJpeg ? 1200 : image.includes('/media/dayz-') ? 800 : 1200
-const imageHeight = isOgJpeg ? 630 : image.includes('/media/dayz-') ? 450 : 630
+const imageType = isOgJpeg ? 'image/jpeg' : 'image/jpeg'
+const imageWidth = 1200
+const imageHeight = 630
 const robots =
   seo.robots ||
   'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
 const jsonLd = buildPageJsonLd(seo, jsonLdExtra)
 const isHome = seo.path === '/' || seo.path === ''
-/** Preload OG only when it supports LCP (hero/product/forums) — not text pages */
+/** Preload OG for LCP on inner hero pages — home uses hero poster only (lighter mobile). */
 const preloadOg =
-  isHome ||
-  seo.path === '/the-finals-hack' ||
-  seo.path === '/forums' ||
-  seo.path.startsWith('/forums/')
+  !isHome &&
+  (seo.path === '/the-finals-hack' ||
+    seo.path === '/forums' ||
+    seo.path.startsWith('/forums/'))
 ---
 
 <!doctype html>

@@ -29,8 +29,10 @@ export function DayZPreview({ className = '', wide = false }: DayZPreviewProps) 
         <div className="video-brand-blur video-brand-blur--top" aria-hidden />
         <div className="video-brand-blur" aria-hidden />
       </div>
-      <p className="sr-only">
-        {DAYZ_HOME_VIDEO.title}. {DAYZ_HOME_VIDEO.posterAlt}
+      <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/60 sm:text-base">
+        {DAYZ_HOME_VIDEO.title}. See THE FINALS ESP and wallhack overlays in real matches, how the
+        radar hack tracks off-screen contestants, and why we publish live Easy Anti-Cheat status
+        after every patch.
       </p>
     </div>
   )

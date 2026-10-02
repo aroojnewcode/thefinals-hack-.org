@@ -3,6 +3,9 @@
  * Every indexed URL maps to a unique crawlable /og/*.jpg under thefinalshack.org.
  */
 
+export const OG_JPEG_WIDTH = 1200
+export const OG_JPEG_HEIGHT = 630
+
 export const OG_HOME = '/og/home.jpg'
 export const OG_PRODUCT = '/og/the-finals-hack.jpg'
 export const OG_FORUMS = '/og/forums.jpg'

@@ -119,7 +119,7 @@ export function HomePage() {
       <div className="hero-to-body" aria-hidden />
 
       <div className="page-body relative z-10">
-        <section className="page-band page-x border-t border-z-soft/15 py-14">
+        <section className="page-band cv-auto page-x border-t border-z-soft/15 py-14">
           <div className="mx-auto max-w-6xl">
             <h2 className="mb-6 text-xl font-semibold tracking-tight text-white sm:text-2xl">
               {HOME_HEADINGS.h2Features}
@@ -141,7 +141,7 @@ export function HomePage() {
           </div>
         </section>
 
-        <section id="preview" className="page-x py-14 sm:py-16">
+        <section id="preview" className="cv-auto page-x py-14 sm:py-16">
           <div className="mx-auto max-w-6xl">
             <h2 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
               {HOME_HEADINGS.h2Featured}
@@ -167,6 +167,7 @@ export function HomePage() {
                     height={360}
                     loading="lazy"
                     decoding="async"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px"
                     className="aspect-video w-full object-cover object-center"
                   />
                   <div className="flex flex-1 flex-col p-5">
@@ -181,7 +182,7 @@ export function HomePage() {
           </div>
         </section>
 
-        <section id="picks" className="page-x py-16 sm:py-20">
+        <section id="picks" className="cv-auto page-x py-16 sm:py-20">
           <div className="mx-auto max-w-6xl">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
@@ -251,7 +252,7 @@ export function HomePage() {
           </div>
         </section>
 
-        <section id="about" className="page-band page-x border-t border-white/10 py-16 sm:py-20">
+        <section id="about" className="page-band cv-auto page-x border-t border-white/10 py-16 sm:py-20">
           <div className="mx-auto grid max-w-6xl gap-4 lg:grid-cols-2">
             <div className="page-card flex h-full min-h-[240px] flex-col justify-between rounded-2xl p-6 sm:rounded-3xl sm:p-8 lg:p-10">
               <div>

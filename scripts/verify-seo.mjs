@@ -64,6 +64,13 @@ for (const file of files) {
     }
   }
 
+  for (const tag of html.match(/<img\b[^>]*>/gi) || []) {
+    const altMatch = tag.match(/\balt=(["'])(.*?)\1/i)
+    if (!altMatch || !altMatch[2].trim()) {
+      fail(`${page}: every <img> must have a non-empty alt attribute`)
+    }
+  }
+
   if (html.includes('assets-prd.ignimgs.com')) fail(`${page}: contains third-party IGN image`)
   if (html.includes('cdn.cosmocheats.com')) fail(`${page}: contains third-party media hotlink`)
   if (html.includes('SearchAction')) fail(`${page}: contains invalid SearchAction`)
@@ -85,6 +92,13 @@ if (
 ) {
   fail('Homepage does not own the exact transactional title')
 }
+if (
+  !home.includes('THE FINALS ESP') ||
+  !home.includes('radar hack') ||
+  !home.toLowerCase().includes('easy anti-cheat status')
+) {
+  fail('Homepage preview copy must mention THE FINALS ESP, radar hack and Easy Anti-Cheat status')
+}
 if (product.includes('<title>Buy The Finals Hack')) fail('Product details page competes with homepage')
 if ((faq.match(/"@type":"FAQPage"/g) || []).length !== 1) fail('/faq must own one FAQPage')
 for (const [name, html] of [
@@ -102,6 +116,15 @@ for (const [name, html] of [
 ]) {
   if (!html.includes('"@id":"https://thefinalshack.org/#product"')) {
     fail(`${name}: missing shared Product ID`)
+  }
+}
+for (const [name, html] of [
+  ['home', home],
+  ['product', product],
+  ['reviews', reviews],
+]) {
+  if (/"@type":"Product"[\s\S]*?"image":"https:\/\/thefinalshack\.org\/media\//.test(html)) {
+    fail(`${name}: Product schema image must use /og/*.jpg, not /media webp`)
   }
 }
 if ((reviews.match(/"@type":"Review"/g) || []).length !== 12) {

@@ -1,5 +1,12 @@
 ﻿import type { FaqItem } from '../data/faqs'
 import {
+  getOgImageForPath,
+  OG_JPEG_HEIGHT,
+  OG_JPEG_WIDTH,
+  OG_HOME,
+  OG_PRODUCT,
+} from '../data/og'
+import {
   OG_IMAGE,
   PRODUCT_PRICE_USD,
   SEO_REGIONS,
@@ -12,8 +19,6 @@ import {
 } from '../data/site'
 import { getReviewsAggregate, REVIEWS } from '../data/reviews'
 import type { GameStatus } from '../data/games'
-import { PAGE_MEDIA } from '../data/media'
-
 export const PRODUCT_ID = `${SITE_URL}/#product`
 
 function absoluteAsset(src: string) {
@@ -77,8 +82,12 @@ export function siteIdentityGraph() {
   ]
 }
 
+function schemaOgImage(seo: PageSeo) {
+  const path = seo.path || '/'
+  return absoluteAsset(getOgImageForPath(path === '' ? '/' : path))
+}
+
 export function webPageNode(seo: PageSeo) {
-  const img = seo.image || OG_IMAGE
   const page = {
     '@type': 'WebPage',
     '@id': `${absoluteUrl(seo.path)}#webpage`,
@@ -94,14 +103,15 @@ export function webPageNode(seo: PageSeo) {
   // Text pages (faq/support/reviews) still expose OG as WebPage.image for social crawlers
   const hasOgImage = Boolean(seo.image)
   if (hasVisibleImage || hasOgImage) {
+    const schemaImg = schemaOgImage(seo)
     page.primaryImageOfPage = {
       '@type': 'ImageObject',
-      url: absoluteAsset(img),
-      width: 1200,
-      height: 630,
+      url: schemaImg,
+      width: OG_JPEG_WIDTH,
+      height: OG_JPEG_HEIGHT,
       caption: seo.imageAlt || seo.title,
     }
-    page.image = absoluteAsset(img)
+    page.image = schemaImg
   }
   return page
 }
@@ -121,12 +131,7 @@ export function productCoreJsonLd() {
     ],
     description: SITE_PURPOSE,
     url: `${SITE_URL}/the-finals-hack`,
-    image: [
-      absoluteAsset('/og/the-finals-hack.jpg'),
-      absoluteAsset('/og/home.jpg'),
-      absoluteAsset(PAGE_MEDIA.product.image),
-      absoluteAsset(PAGE_MEDIA.home.image),
-    ],
+    image: [absoluteAsset(OG_PRODUCT), absoluteAsset(OG_HOME)],
     brand: { '@type': 'Brand', name: SITE_NAME },
     manufacturer: { '@id': `${SITE_URL}/#organization` },
     category: 'PC game software',
@@ -150,7 +155,7 @@ export function productDetailJsonLd(status: GameStatus) {
   return {
     ...productCoreJsonLd(),
     url: `${SITE_URL}/the-finals-hack`,
-    image: absoluteAsset(PAGE_MEDIA.product.image),
+    image: absoluteAsset(OG_PRODUCT),
     about: {
       '@type': 'VideoGame',
       name: 'THE FINALS',

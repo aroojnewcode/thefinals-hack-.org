@@ -76,8 +76,7 @@ export const SEO = {
     path: '/reviews',
     ogType: 'website',
     image: PAGE_OG.reviews,
-    imageAlt:
-      'THE FINALS blue office map with FCAR, skeleton ESP and radar hack overlay on The Finals hack reviews page',
+    imageAlt: 'The Finals Hack reviews — buyer feedback on Aimbot, ESP and Easy Anti-Cheat status',
     robots: INDEX_ROBOTS,
   },
   faq: {
