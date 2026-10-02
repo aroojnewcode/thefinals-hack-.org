@@ -66,9 +66,40 @@ async function probe(url, expectStatus, expectXml, method = 'GET') {
   }
 }
 
+const GOOGLEBOT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+
+async function probeGooglebot(url, method) {
+  try {
+    const res = await fetch(url, {
+      method,
+      redirect: 'manual',
+      headers: { 'User-Agent': GOOGLEBOT },
+    })
+    const ct = res.headers.get('content-type') || ''
+    if (res.status !== 200) {
+      fail(`Googlebot ${method} ${url} expected HTTP 200, got ${res.status}`)
+      return
+    }
+    if (!ct.includes('xml')) {
+      fail(`Googlebot ${method} ${url} expected XML content-type, got ${ct || 'unknown'}`)
+      return
+    }
+    if (method === 'GET') {
+      const body = await res.text()
+      if (!body.trimStart().startsWith('<?xml')) {
+        fail(`Googlebot GET ${url} body is not XML`)
+      }
+    }
+  } catch (err) {
+    fail(`Googlebot ${method} ${url} failed: ${err.message}`)
+  }
+}
+
 console.log('Checking live sitemap endpoints…')
 await probe(CANONICAL, 200, true)
 await probe(CANONICAL, 200, true, 'HEAD')
+await probeGooglebot(CANONICAL, 'HEAD')
+await probeGooglebot(CANONICAL, 'GET')
 await probe(`${SITE}/robots.txt`, 200, false)
 await probe(`https://www.thefinalshack.org/sitemap.xml`, 301, false)
 for (const path of LEGACY) {
