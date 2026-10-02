@@ -62,70 +62,118 @@ const LEGACY_SITEMAP_PATHS = new Set([
   '/sitemap_index.xml',
 ])
 
+const EMPTY_SITEMAP = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n`
+
 function apexSitemapUrl(pathname) {
   return `https://thefinalshack.org${pathname.startsWith('/') ? pathname : `/${pathname}`}`
 }
 
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url)
+function seoHeaders(seoType, sourceHeaders) {
+  const headers = new Headers(sourceHeaders)
+  headers.set('Content-Type', seoType)
+  headers.set('X-Content-Type-Options', 'nosniff')
+  headers.set('Access-Control-Allow-Origin', '*')
+  headers.delete('Link')
+  if (!headers.has('Cache-Control')) {
+    headers.set('Cache-Control', 'public, max-age=3600')
+  }
+  return headers
+}
 
-    if (url.protocol === 'http:') {
-      url.protocol = 'https:'
-      const apex = toApexUrl(url)
-      return Response.redirect((apex || url).toString(), 301)
-    }
+async function serveSeoAsset(env, request, assetPath, seoType) {
+  const seoResponse = await assetsFetch(env, request, assetPath + new URL(request.url).search)
+  const headers = seoHeaders(seoType, seoResponse.headers)
 
-    const apex = toApexUrl(url)
-    if (apex) {
-      return Response.redirect(apex.toString(), 301)
+  if (!seoResponse.ok) {
+    if (assetPath === '/sitemap.xml') {
+      return new Response(EMPTY_SITEMAP, { status: 503, headers })
     }
-
-    if (LEGACY_SITEMAP_PATHS.has(url.pathname) || url.pathname === '/sitemap.xml/') {
-      return Response.redirect(apexSitemapUrl('/sitemap.xml'), 301)
-    }
-
-    const seoType = SEO_ASSETS[url.pathname]
-    if (seoType) {
-      const assetPath = url.pathname === '/sitemap.xml/' ? '/sitemap.xml' : url.pathname
-      const seoResponse = await assetsFetch(env, request, assetPath + url.search)
-      const headers = new Headers(seoResponse.headers)
-      headers.set('Content-Type', seoType)
-      headers.set('X-Content-Type-Options', 'nosniff')
-      headers.delete('Link')
-      if (!headers.has('Cache-Control')) {
-        headers.set('Cache-Control', 'public, max-age=3600')
-      }
-      if (!seoResponse.ok && assetPath === '/sitemap.xml') {
-        const fallback = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n`
-        return new Response(fallback, { status: 503, headers })
-      }
-      return new Response(seoResponse.body, {
-        status: seoResponse.status,
-        statusText: seoResponse.statusText,
-        headers,
-      })
-    }
-
-    const assetResponse = await assetsFetch(env, request, url.pathname + url.search)
-    const response = withHtmlCharset(assetResponse)
-
-    // Help crawlers + Seobility: advertise preferred host + self-canonical
-    const headers = new Headers(response.headers)
-    if (!headers.has('Strict-Transport-Security')) {
-      headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload')
-    }
-    const contentType = headers.get('content-type') || ''
-    if (contentType.includes('text/html')) {
-      const canonical = `https://${url.hostname}${url.pathname === '/' ? '/' : url.pathname.replace(/\/$/, '') || '/'}`
-      const existing = headers.get('Link')
-      const linkCanonical = `<${canonical}>; rel="canonical"`
-      headers.set('Link', existing ? `${existing}, ${linkCanonical}` : linkCanonical)
-    }
-    return new Response(response.body, {
-      status: response.status,
-      statusText: response.statusText,
+    return new Response(seoResponse.statusText || 'Not Found', {
+      status: seoResponse.status,
       headers,
     })
+  }
+
+  const body = await seoResponse.arrayBuffer()
+  if (assetPath === '/sitemap.xml') {
+    const head = new TextDecoder().decode(body.slice(0, 64))
+    if (!head.trimStart().startsWith('<?xml')) {
+      return new Response(EMPTY_SITEMAP, { status: 503, headers })
+    }
+  }
+
+  return new Response(body, {
+    status: seoResponse.status,
+    statusText: seoResponse.statusText,
+    headers,
+  })
+}
+
+async function handleRequest(request, env) {
+  const url = new URL(request.url)
+
+  if (url.protocol === 'http:') {
+    url.protocol = 'https:'
+    const apex = toApexUrl(url)
+    return Response.redirect((apex || url).toString(), 301)
+  }
+
+  const apex = toApexUrl(url)
+  if (apex) {
+    return Response.redirect(apex.toString(), 301)
+  }
+
+  if (LEGACY_SITEMAP_PATHS.has(url.pathname) || url.pathname === '/sitemap.xml/') {
+    return Response.redirect(apexSitemapUrl('/sitemap.xml'), 301)
+  }
+
+  const seoType = SEO_ASSETS[url.pathname]
+  if (seoType) {
+    const assetPath = url.pathname === '/sitemap.xml/' ? '/sitemap.xml' : url.pathname
+    return serveSeoAsset(env, request, assetPath, seoType)
+  }
+
+  const assetResponse = await assetsFetch(env, request, url.pathname + url.search)
+  const response = withHtmlCharset(assetResponse)
+
+  const headers = new Headers(response.headers)
+  if (!headers.has('Strict-Transport-Security')) {
+    headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload')
+  }
+  const contentType = headers.get('content-type') || ''
+  if (contentType.includes('text/html')) {
+    const canonical = `https://${url.hostname}${url.pathname === '/' ? '/' : url.pathname.replace(/\/$/, '') || '/'}`
+    const existing = headers.get('Link')
+    const linkCanonical = `<${canonical}>; rel="canonical"`
+    headers.set('Link', existing ? `${existing}, ${linkCanonical}` : linkCanonical)
+  }
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  })
+}
+
+export default {
+  async fetch(request, env) {
+    try {
+      return await handleRequest(request, env)
+    } catch (error) {
+      console.error('Worker error:', error)
+      const path = new URL(request.url).pathname
+      if (path === '/sitemap.xml' || path === '/sitemap.xml/') {
+        return new Response(EMPTY_SITEMAP, {
+          status: 503,
+          headers: seoHeaders(SEO_ASSETS['/sitemap.xml'], new Headers()),
+        })
+      }
+      if (path === '/robots.txt') {
+        return new Response('User-agent: *\nDisallow:\n', {
+          status: 503,
+          headers: seoHeaders(SEO_ASSETS['/robots.txt'], new Headers()),
+        })
+      }
+      return new Response('Internal Server Error', { status: 500 })
+    }
   },
 }

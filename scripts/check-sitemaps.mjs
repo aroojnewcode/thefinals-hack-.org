@@ -70,6 +70,21 @@ for (const path of LEGACY) {
   await probe(`${SITE}${path}`, 301, false)
 }
 
+const xml = readFileSync(join(root, 'public', 'sitemap.xml'), 'utf8')
+const pageUrls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
+console.log(`Checking ${pageUrls.length} page URLs from sitemap…`)
+for (const pageUrl of pageUrls) {
+  try {
+    const res = await fetch(pageUrl, {
+      redirect: 'follow',
+      headers: { 'User-Agent': 'thefinalshack-sitemap-check/1.0' },
+    })
+    if (res.status !== 200) fail(`${pageUrl} returned HTTP ${res.status}`)
+  } catch (err) {
+    fail(`${pageUrl} fetch failed: ${err.message}`)
+  }
+}
+
 if (failures.length) {
   console.error('Sitemap check failed:\n- ' + failures.join('\n- '))
   process.exit(1)
