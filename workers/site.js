@@ -48,6 +48,22 @@ function toApexUrl(url) {
 const SEO_ASSETS = {
   '/sitemap.xml': 'application/xml; charset=utf-8',
   '/robots.txt': 'text/plain; charset=utf-8',
+  '/sitemap.css': 'text/css; charset=utf-8',
+}
+
+const LEGACY_SITEMAP_PATHS = new Set([
+  '/sitemap-pages.xml',
+  '/sitemap-products.xml',
+  '/sitemap-forums.xml',
+  '/sitemap-images.xml',
+  '/sitemap-blogs.xml',
+  '/sitemap-regions.xml',
+  '/sitemap-index.xml',
+  '/sitemap_index.xml',
+])
+
+function apexSitemapUrl(pathname) {
+  return `https://thefinalshack.org${pathname.startsWith('/') ? pathname : `/${pathname}`}`
 }
 
 export default {
@@ -65,22 +81,26 @@ export default {
       return Response.redirect(apex.toString(), 301)
     }
 
+    if (LEGACY_SITEMAP_PATHS.has(url.pathname) || url.pathname === '/sitemap.xml/') {
+      return Response.redirect(apexSitemapUrl('/sitemap.xml'), 301)
+    }
+
     const seoType = SEO_ASSETS[url.pathname]
     if (seoType) {
-      const seoResponse = await assetsFetch(env, request, url.pathname + url.search)
-      if (seoResponse.ok) {
-        const headers = new Headers(seoResponse.headers)
-        headers.set('Content-Type', seoType)
-        headers.set('X-Content-Type-Options', 'nosniff')
-        if (!headers.has('Cache-Control')) {
-          headers.set('Cache-Control', 'public, max-age=3600')
-        }
-        return new Response(seoResponse.body, {
-          status: seoResponse.status,
-          statusText: seoResponse.statusText,
-          headers,
-        })
+      const assetPath = url.pathname === '/sitemap.xml/' ? '/sitemap.xml' : url.pathname
+      const seoResponse = await assetsFetch(env, request, assetPath + url.search)
+      const headers = new Headers(seoResponse.headers)
+      headers.set('Content-Type', seoType)
+      headers.set('X-Content-Type-Options', 'nosniff')
+      headers.delete('Link')
+      if (!headers.has('Cache-Control')) {
+        headers.set('Cache-Control', 'public, max-age=3600')
       }
+      return new Response(seoResponse.body, {
+        status: seoResponse.status,
+        statusText: seoResponse.statusText,
+        headers,
+      })
     }
 
     const assetResponse = await assetsFetch(env, request, url.pathname + url.search)

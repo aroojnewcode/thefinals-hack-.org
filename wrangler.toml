@@ -22,11 +22,9 @@ directory = "./dist"
 binding = "ASSETS"
 not_found_handling = "404-page"
 html_handling = "drop-trailing-slash"
+# Run worker first for sitemap/robots so www→apex 301 and XML/plain Content-Type apply (GSC fetch).
 run_worker_first = [
   "/*",
-  "!/sitemap.xml",
-  "!/robots.txt",
-  "!/sitemap.css",
   "!/favicon.svg",
   "!/_astro/*",
   "!/media/*",
