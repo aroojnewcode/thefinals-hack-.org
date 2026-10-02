@@ -1,6 +1,5 @@
 ﻿import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join, relative } from 'node:path'
-import { ALL_SITE_IMAGES } from './seo-site-images.mjs'
 
 const root = join(import.meta.dirname, '..')
 const dist = join(root, 'dist')
@@ -222,8 +221,8 @@ if (sitemapUrlCount < 20) {
 if (!sitemap.includes('<loc>https://thefinalshack.org/</loc>')) {
   fail('dist/sitemap.xml is empty or missing homepage URL')
 }
-if (sitemap.length < 10_000) {
-  fail(`dist/sitemap.xml is too small (${sitemap.length} bytes) — deploy would serve an empty sitemap`)
+if (sitemap.length < 1_500) {
+  fail(`dist/sitemap.xml is too small (${sitemap.length} bytes) — likely empty or truncated`)
 }
 if (/<urlset[^>]*\/>/.test(sitemap.replace(/\s/g, ''))) {
   fail('dist/sitemap.xml must not be a self-closing empty urlset')
@@ -234,7 +233,10 @@ if (!sitemap.includes('https://thefinalshack.org/')) {
   fail('sitemap.xml must use https://thefinalshack.org URLs')
 }
 if (sitemap.includes('xmlns:video=') || sitemap.includes('<video:video>')) {
-  fail('sitemap.xml must be a standard urlset + image extension only (no video namespace)')
+  fail('sitemap.xml must be a standard page urlset only (no video namespace)')
+}
+if (sitemap.includes('xmlns:image=') || sitemap.includes('<image:')) {
+  fail('sitemap.xml must list pages only (no image extension; use on-page og:image)')
 }
 if (sitemap.includes('xmlns:xhtml=') || sitemap.includes('<xhtml:link')) {
   fail('sitemap.xml must not embed xhtml:hreflang (use on-page link tags only)')
@@ -254,7 +256,6 @@ const expectedUrls = new Set(
 const urlBlocks = sitemap.match(/<url>[\s\S]*?<\/url>/g) || []
 const pageLocs = urlBlocks.map((block) => block.match(/<loc>([^<]+)<\/loc>/)?.[1]).filter(Boolean)
 const uniqueSitemapUrls = new Set(pageLocs)
-const imageLocs = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((match) => match[1])
 for (const url of expectedUrls) {
   if (!uniqueSitemapUrls.has(url)) fail(`sitemap.xml missing built page ${url}`)
 }
@@ -265,18 +266,10 @@ if (uniqueSitemapUrls.size !== pageLocs.length) fail('sitemap.xml contains dupli
 if (urlBlocks.length !== expectedUrls.size) {
   fail(`sitemap.xml must contain exactly ${expectedUrls.size} built page URLs`)
 }
-if ((sitemap.match(/<image:image>/g) || []).length < expectedUrls.size) {
-  fail('Every sitemap URL must include at least one image entry')
-}
 for (const block of urlBlocks) {
   const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1] || '(unknown)'
-  if (!block.includes('<image:image>') || !block.includes('<image:loc>')) {
-    fail(`sitemap URL missing image entry: ${loc}`)
-  }
-}
-for (const image of ALL_SITE_IMAGES) {
-  if (!imageLocs.some((loc) => loc.endsWith(image))) {
-    fail(`sitemap.xml missing required image ${image}`)
+  if (!block.includes('<lastmod>') || !block.includes('<changefreq>') || !block.includes('<priority>')) {
+    fail(`sitemap URL missing lastmod/changefreq/priority: ${loc}`)
   }
 }
 if (!sitemap.trimStart().startsWith('<?xml version="1.0" encoding="UTF-8"?>')) {

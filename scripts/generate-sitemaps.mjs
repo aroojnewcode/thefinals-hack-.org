@@ -1,6 +1,6 @@
 ﻿/**
- * Single sitemap at /sitemap.xml — every indexed page URL + image entries.
- * One urlset only (never a sitemap index). 404 is excluded.
+ * Single page sitemap at /sitemap.xml — one <loc> per indexed HTML URL (404 excluded).
+ * Standard sitemap 0.9 only (no image/video/xhtml extensions) for reliable GSC fetch.
  */
 import { existsSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
@@ -13,36 +13,6 @@ const dataDir = join(root, 'src', 'data')
 const pagesDir = join(root, 'src', 'pages')
 const SITE = (process.env.SITE_URL || 'https://thefinalshack.org').replace(/\/$/, '')
 const TODAY = new Date().toLocaleDateString('en-CA')
-const HERO_FULL = '/media/dayz-hero-full.webp'
-const COVER = '/media/dayz-cover.webp'
-const PRODUCT_ESP = '/media/finals-esp-gameplay.webp'
-const GAMEPLAY_TRAINING = '/media/finals-gameplay-training-range.webp'
-const GAMEPLAY_ARENA = '/media/finals-gameplay-arena-elimination.webp'
-const GAMEPLAY_OFFICE = '/media/finals-gameplay-office-esp.webp'
-const BOX = '/media/finals-gameplay-red-grid-radar.webp'
-const ESP = '/media/finals-gameplay-doorway-esp.webp'
-const MENU = '/media/dayz-menu.gif'
-const GAMEPLAY_LAB = '/media/finals-gameplay-laboratory-esp.webp'
-const GAMEPLAY_DOORWAY = '/media/finals-gameplay-doorway-esp.webp'
-const GAMEPLAY_RED = '/media/finals-gameplay-red-grid-radar.webp'
-const VIDEO_THUMB = '/media/dayz-video-thumb.jpg'
-const OG_DEFAULT = '/og/the-finals-hack.jpg'
-
-const FORUM_IMAGES = {
-  'features-list': GAMEPLAY_ARENA,
-  hotkeys: BOX,
-  'complete-setup': GAMEPLAY_OFFICE,
-  'disable-antivirus': GAMEPLAY_TRAINING,
-  'undetected-status': GAMEPLAY_ARENA,
-  'aimbot-settings': '/media/finals-gameplay-laboratory-esp.webp',
-  'esp-wallhack-guide': ESP,
-  'radar-hack-guide': GAMEPLAY_TRAINING,
-  'stream-proof-setup': ESP,
-  'easy-anti-cheat-status': PRODUCT_ESP,
-  'windows-setup': PRODUCT_ESP,
-  'raid-play-guide': BOX,
-  'loader-errors': GAMEPLAY_OFFICE,
-}
 
 const PAGE_META = {
   '/': { priority: '1.0', changefreq: 'daily' },
@@ -63,16 +33,6 @@ function escapeXml(value) {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&apos;')
-}
-
-/** Keep captions ASCII-safe for maximum crawler compatibility. */
-function asciiSafe(value) {
-  return String(value)
-    .replace(/[\u2013\u2014]/g, '-')
-    .replace(/[\u2018\u2019]/g, "'")
-    .replace(/[\u201C\u201D]/g, '"')
-    .replace(/\u2026/g, '...')
-    .replace(/[^\x09\x0A\x0D\x20-\x7E]/g, '')
 }
 
 function siteUrl(path) {
@@ -106,186 +66,14 @@ function loadStaticRoutes() {
     .map((entry) => (entry.name === 'index.astro' ? '/' : `/${entry.name.slice(0, -6)}`))
 }
 
-function imageBlock({ src, title, caption }) {
-  return `    <image:image>
-      <image:loc>${escapeXml(siteUrl(src))}</image:loc>
-      <image:title>${escapeXml(asciiSafe(title))}</image:title>
-      <image:caption>${escapeXml(asciiSafe(caption))}</image:caption>
-    </image:image>`
-}
-
-function urlEntry({ path, priority, changefreq, lastmod = TODAY, images }) {
-  if (!images?.length) throw new Error(`Sitemap entry for ${path} is missing images`)
+function urlEntry({ path, priority, changefreq, lastmod = TODAY }) {
   const url = siteUrl(path)
-  const media = images.map((image) => imageBlock(image))
   return `  <url>
     <loc>${escapeXml(url)}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
-${media.join('\n')}
   </url>`
-}
-
-function imagesForPath(path, games, forums) {
-  if (path === '/') {
-    return [
-      {
-        src: '/og/home.jpg',
-        title: 'The Finals Hack Open Graph',
-        caption: 'Google and social preview image for thefinalshack.org homepage.',
-      },
-      {
-        src: HERO_FULL,
-        title: 'The Finals Hack Hero',
-        caption: 'Buy The Finals hack - THE FINALS Aimbot, ESP and radar hack hero artwork for PC.',
-      },
-      {
-        src: PRODUCT_ESP,
-        title: 'THE FINALS ESP Gameplay Screenshot',
-        caption: 'In-game ESP wallhack preview with player box and skeleton overlay for The Finals hack.',
-      },
-      {
-        src: VIDEO_THUMB,
-        title: 'The Finals Hack Preview Thumbnail',
-        caption: 'Thumbnail for the THE FINALS Aimbot and ESP preview video.',
-      },
-      {
-        src: OG_DEFAULT,
-        title: 'The Finals Hack Product Social Preview',
-        caption: 'Default Open Graph image for thefinalshack.org product pages.',
-      },
-    ]
-  }
-
-  const game = games.find((g) => path === `/${g.slug}-hack`)
-  if (game) {
-    return [
-      {
-        src: '/og/the-finals-hack.jpg',
-        title: 'The Finals Hack Open Graph',
-        caption: 'Google and social preview for the The Finals hack product page.',
-      },
-      {
-        src: PRODUCT_ESP,
-        title: 'THE FINALS ESP Wallhack Gameplay',
-        caption: 'THE FINALS first-person view with ESP bounding box and skeleton overlay.',
-      },
-      {
-        src: HERO_FULL,
-        title: `${game.name} Cheats Product Hero`,
-        caption: `Hero artwork for ${game.name} Aimbot, ESP and radar hack product details.`,
-      },
-      {
-        src: MENU,
-        title: `${game.name} Cheats Menu Preview`,
-        caption: `Menu and Aimbot settings preview for ${game.name} cheats.`,
-      },
-      {
-        src: ESP,
-        title: `${game.name} ESP Wallhack Screenshot`,
-        caption: `THE FINALS player ESP with bounding box and skeleton overlay for ${game.name} cheats.`,
-      },
-      {
-        src: VIDEO_THUMB,
-        title: 'The Finals Hack Preview Thumbnail',
-        caption: 'Thumbnail for the The Finals hack preview video.',
-      },
-    ]
-  }
-
-  if (path === '/forums') {
-    return [
-      {
-        src: '/og/forums.jpg',
-        title: 'The Finals Hack Forums Open Graph',
-        caption: 'Google preview image for the The Finals Hack guides index.',
-      },
-      {
-        src: MENU,
-        title: 'The Finals Hack Forum Artwork',
-        caption: 'Artwork reference for THE FINALS setup and feature guides.',
-      },
-    ]
-  }
-
-  if (path.startsWith('/forums/')) {
-    const slug = path.slice('/forums/'.length)
-    const forum = forums.find((f) => f.slug === slug)
-    return [
-      {
-        src: `/og/forums-${slug}.jpg`,
-        title: `${forum?.title || slug} Open Graph`,
-        caption:
-          forum?.metaDescription ||
-          `Google preview image for ${forum?.title || slug} on thefinalshack.org.`,
-      },
-      {
-        src: FORUM_IMAGES[slug] || MENU,
-        title: `${forum?.title || slug} Artwork`,
-        caption:
-          forum?.excerpt ||
-          `Visible The Finals Hack guide artwork for ${forum?.title || slug}.`,
-      },
-    ]
-  }
-
-  if (path === '/reviews') {
-    return [
-      {
-        src: '/og/reviews.jpg',
-        title: 'The Finals Hack Reviews Open Graph',
-        caption: 'Google preview image for The Finals hack reviews.',
-      },
-    ]
-  }
-  if (path === '/faq') {
-    return [
-      {
-        src: '/og/faq.jpg',
-        title: 'The Finals Hack FAQ Open Graph',
-        caption: 'Google preview image for the The Finals Hack FAQ.',
-      },
-    ]
-  }
-  if (path === '/support') {
-    return [
-      {
-        src: '/og/support.jpg',
-        title: 'The Finals Hack Support Open Graph',
-        caption: 'Google preview image for The Finals Hack support.',
-      },
-    ]
-  }
-  if (path === '/privacy') {
-    return [
-      {
-        src: '/og/privacy.jpg',
-        title: 'The Finals Hack Privacy Policy',
-        caption: 'Privacy policy preview for thefinalshack.org orders and support.',
-      },
-    ]
-  }
-  if (path === '/terms') {
-    return [
-      {
-        src: '/og/terms.jpg',
-        title: 'The Finals Hack Terms of Use',
-        caption: 'License terms preview for The Finals Hack.',
-      },
-    ]
-  }
-  if (path === '/refunds') {
-    return [
-      {
-        src: '/og/refunds.jpg',
-        title: 'The Finals Hack Refund Policy',
-        caption: 'Refund rules preview for digital The Finals Hack licenses.',
-      },
-    ]
-  }
-
-  return [{ src: OG_DEFAULT, title: 'The Finals Hack', caption: 'The Finals Hack page artwork.' }]
 }
 
 function collectAllPaths(games, forums, staticRoutes) {
@@ -294,7 +82,6 @@ function collectAllPaths(games, forums, staticRoutes) {
     ...games.map((game) => `/${game.slug}-hack`),
     ...forums.map((forum) => `/forums/${forum.slug}`),
   ])
-  // Never index error page
   paths.delete('/404')
   return [...paths]
 }
@@ -328,13 +115,11 @@ function buildSitemap(games, forums, allPaths) {
       priority: meta.priority,
       changefreq: meta.changefreq,
       lastmod: forum?.date || TODAY,
-      images: imagesForPath(path, games, forums),
     })
   })
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${entries.join('\n')}
 </urlset>
 `
@@ -359,7 +144,6 @@ function validate(games, forums, allPaths, sitemap) {
 
   const expectedUrls = new Set(allPaths.map(siteUrl))
   const pageLocs = [...sitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>/g)].map((match) => match[1])
-  const imageLocs = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((match) => match[1])
   const urlBlocks = sitemap.match(/<url>[\s\S]*?<\/url>/g) || []
 
   for (const url of expectedUrls) {
@@ -376,14 +160,8 @@ function validate(games, forums, allPaths, sitemap) {
   if (urlBlocks.length !== expectedUrls.size) {
     errors.push(`Expected ${expectedUrls.size} <url> entries, found ${urlBlocks.length}`)
   }
-  for (const block of urlBlocks) {
-    const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1] || '(unknown)'
-    if (!block.includes('<image:image>') || !block.includes('<image:loc>')) {
-      errors.push(`URL missing image entry: ${loc}`)
-    }
-  }
-  for (const image of ALL_SITE_IMAGES) {
-    if (!imageLocs.includes(siteUrl(image))) errors.push(`Sitemap missing required image: ${image}`)
+  if (sitemap.includes('xmlns:image') || sitemap.includes('<image:')) {
+    errors.push('Page sitemap must not use the image extension (images are on-page via og:image)')
   }
   if (/Tarkov|tarkovcheats|EFT Reaper|Warzone|warzonecheats|Ricochet/i.test(sitemap)) {
     errors.push('Sitemap still contains legacy Tarkov/Warzone labels')
@@ -393,12 +171,6 @@ function validate(games, forums, allPaths, sitemap) {
   }
   if (/tarkovcheats|warzonecheats|wardogshacks|theisle/i.test(sitemap)) {
     errors.push('Sitemap contains a non-THE FINALS domain')
-  }
-  if (imageLocs.length < expectedUrls.size) {
-    errors.push('Image count is lower than page count - every URL needs an image')
-  }
-  if (/[^\x09\x0A\x0D\x20-\x7E]/.test(sitemap.replace(/https?:\/\//g, ''))) {
-    // Allow non-ascii only inside https URLs if any; captions should be ascii.
   }
   if (errors.length) throw new Error(`Sitemap validation failed:\n- ${errors.join('\n- ')}`)
 }
@@ -412,43 +184,43 @@ function main() {
   validate(games, forums, allPaths, sitemap)
 
   const robotsTxt = [
-      'User-agent: Googlebot',
-      'Allow: /',
-      'Allow: /sitemap.xml',
-      'Allow: /robots.txt',
-      'Allow: /media/',
-      'Allow: /og/',
-      'Allow: /videos/',
-      '',
-      'User-agent: Google-InspectionTool',
-      'Allow: /',
-      'Allow: /sitemap.xml',
-      'Allow: /robots.txt',
-      'Allow: /media/',
-      'Allow: /og/',
-      'Allow: /videos/',
-      '',
-      'User-agent: Bingbot',
-      'Allow: /',
-      'Allow: /sitemap.xml',
-      'Allow: /robots.txt',
-      'Allow: /media/',
-      'Allow: /og/',
-      'Allow: /videos/',
-      '',
-      'User-agent: *',
-      'Allow: /',
-      'Allow: /sitemap.xml',
-      'Allow: /robots.txt',
-      'Allow: /media/',
-      'Allow: /og/',
-      'Allow: /videos/',
-      'Disallow: /404',
-      'Disallow: /404.html',
-      '',
-      `Sitemap: ${siteUrl('/sitemap.xml')}`,
-      '',
-    ].join('\n')
+    'User-agent: Googlebot',
+    'Allow: /',
+    'Allow: /sitemap.xml',
+    'Allow: /robots.txt',
+    'Allow: /media/',
+    'Allow: /og/',
+    'Allow: /videos/',
+    '',
+    'User-agent: Google-InspectionTool',
+    'Allow: /',
+    'Allow: /sitemap.xml',
+    'Allow: /robots.txt',
+    'Allow: /media/',
+    'Allow: /og/',
+    'Allow: /videos/',
+    '',
+    'User-agent: Bingbot',
+    'Allow: /',
+    'Allow: /sitemap.xml',
+    'Allow: /robots.txt',
+    'Allow: /media/',
+    'Allow: /og/',
+    'Allow: /videos/',
+    '',
+    'User-agent: *',
+    'Allow: /',
+    'Allow: /sitemap.xml',
+    'Allow: /robots.txt',
+    'Allow: /media/',
+    'Allow: /og/',
+    'Allow: /videos/',
+    'Disallow: /404',
+    'Disallow: /404.html',
+    '',
+    `Sitemap: ${siteUrl('/sitemap.xml')}`,
+    '',
+  ].join('\n')
 
   writeFileSync(join(publicDir, 'sitemap.xml'), sitemap, 'utf8')
   writeFileSync(join(publicDir, 'robots.txt'), robotsTxt, 'utf8')

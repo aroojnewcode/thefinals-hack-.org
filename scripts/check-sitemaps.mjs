@@ -92,8 +92,12 @@ async function probeGooglebot(url, method) {
       if (!body.includes('<loc>https://thefinalshack.org/</loc>')) {
         fail(`Googlebot GET ${url} returned an empty or invalid sitemap (no homepage <loc>)`)
       }
-      if (body.length < 10_000) {
-        fail(`Googlebot GET ${url} sitemap too small (${body.length} bytes)`)
+      const urlCount = (body.match(/<url>/g) || []).length
+      if (urlCount < 20) {
+        fail(`Googlebot GET ${url} must list all pages (found ${urlCount} <url> entries)`)
+      }
+      if (body.includes('<image:') || body.includes('xmlns:image')) {
+        fail(`Googlebot GET ${url} must be a page-only sitemap (no image extension)`)
       }
     }
   } catch (err) {
